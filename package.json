@@ -4,7 +4,11 @@
   "description": "Translating Crypto for Africa",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node esbuild.config.mjs",
+    "start": "npm run build && node dist/api",
+    "dev": "tsx watch api",
+    "deploy": "npm run build && sam package --template-file template.yml --output-template-file package.yml --s3-bucket aws-sam-cli-managed-default-samclisourcebucket-heomivaqhyhs && sam deploy --template-file package.yml --stack-name chainafric-service --capabilities CAPABILITY_IAM"
   },
   "repository": {
     "type": "git",
@@ -23,6 +27,7 @@
   "homepage": "https://github.com/CalebKiragu/chainafric-api#readme",
   "dependencies": {
     "aws-serverless-express": "^3.4.0",
+    "axios": "^1.9.0",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
@@ -30,23 +35,33 @@
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.14.1",
     "sequelize": "^6.37.7",
+    "sequelize-typescript": "^2.1.6",
+    "serverless-http": "^3.2.0",
     "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.1"
+    "swagger-ui-express": "^5.0.1",
+    "ua-parser-js": "^2.0.3"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.149",
     "@types/bcrypt": "^5.0.2",
+    "@types/body-parser": "^1.19.5",
     "@types/cors": "^2.8.18",
     "@types/express": "^5.0.2",
+    "@types/express-rate-limit": "^6.0.2",
     "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^22.15.19",
     "@types/sequelize": "^4.28.20",
     "@types/swagger-ui-express": "^4.1.8",
+    "@types/ua-parser-js": "^0.7.39",
+    "esbuild": "^0.25.4",
     "eslint": "^9.27.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.4.0",
+    "express-list-endpoints": "^7.1.1",
+    "fast-glob": "^3.3.3",
     "prettier": "^3.5.3",
     "ts-node": "^10.9.2",
+    "tsx": "^4.19.4",
     "typescript": "^5.8.3"
   }
 }

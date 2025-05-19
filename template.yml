@@ -1,0 +1,29 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Globals:
+  Api:
+    Name: chainafric-service
+    Cors:
+      AllowOrigin: "*"
+      AllowMethods: "OPTIONS,POST,GET,DELETE,PUT"
+      AllowHeaders: "Content-Type,Authorization"
+      AllowCredentials: false
+Resources:
+  ChainAfricService:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: dist/index.handler
+      Runtime: nodejs23.x
+      Timeout: 240
+      MemorySize: 1024
+      Events:
+        Test:
+          Type: Api
+          Properties:
+            Path: /
+            Method: GET
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        EntryPoints:
+          - src/index.ts
