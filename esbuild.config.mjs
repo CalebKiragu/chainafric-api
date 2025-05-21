@@ -4,10 +4,6 @@ import glob from "fast-glob";
 const entries = await glob([
   "src/**/*.ts",
   "api/**/*.ts",
-  "articles/**/*.ts",
-  "streams/**/*.ts",
-  "workers/**/*.ts",
-  "utils/**/*.ts",
   "models/**/*.ts",
   "config/**/*",
   "types/**/*.ts",

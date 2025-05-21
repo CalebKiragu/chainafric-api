@@ -12,9 +12,6 @@ const config = require(path.join(__dirname, "..", "config", "config.js"))[env];
 
 interface DB {
   [key: string]: typeof Model | any;
-  sequelize: () => Promise<Sequelize>;
-  Sequelize: typeof Sequelize;
-  models: () => Promise<typeof MODELS>;
   isConnected?: boolean;
 }
 
@@ -61,8 +58,12 @@ fs.readdirSync(__dirname)
   .forEach((file) => {
     const modelImport = require(path.join(__dirname, file));
     const model = modelImport.default
-      ? modelImport.default(sequelize, DataTypes)
-      : modelImport(sequelize, DataTypes);
+      ? modelImport.default(sequelize)
+      : modelImport(sequelize);
+    if (!model || !model.name) {
+      console.warn(`⚠️ Skipped loading model from file ${file}`);
+      return;
+    }
     db[model.name] = model;
   });
 
@@ -75,7 +76,7 @@ Object.keys(db).forEach((modelName) => {
 });
 
 // Initialize DB connection
-const sequelizeInit = async (): Promise<Sequelize> => {
+export const sequelizeInit = async (): Promise<Sequelize> => {
   if (db.isConnected) {
     console.log("Using existing connection...");
     return sequelize;
@@ -93,12 +94,9 @@ const sequelizeInit = async (): Promise<Sequelize> => {
 };
 
 // Expose models and sequelize instance
-db.models = async () => {
+export const models = async () => {
   await sequelizeInit();
   return MODELS;
 };
-
-db.sequelize = sequelizeInit;
-db.Sequelize = Sequelize;
 
 export default db;

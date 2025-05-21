@@ -1,8 +1,7 @@
+import { Wallet } from "../controllers/walletController";
 import express from "express";
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.send("Wallet route root");
-});
+router.get("/", Wallet.test);
 
 export default router;

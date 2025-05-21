@@ -1,7 +1,7 @@
 {
   "name": "chainafric-api",
   "version": "0.0.1",
-  "description": "Translating Crypto for Africa",
+  "description": "A multilingual wallet tracking and crypto translation engine reducing the barrier to entry into DeFi services by improving access to DeFi information.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -26,12 +26,15 @@
   },
   "homepage": "https://github.com/CalebKiragu/chainafric-api#readme",
   "dependencies": {
+    "aws-sdk": "^2.1692.0",
     "aws-serverless-express": "^3.4.0",
     "axios": "^1.9.0",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
+    "google-auth-library": "^9.15.1",
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.14.1",
     "sequelize": "^6.37.7",
@@ -39,13 +42,15 @@
     "serverless-http": "^3.2.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
-    "ua-parser-js": "^2.0.3"
+    "ua-parser-js": "^2.0.3",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.149",
     "@types/bcrypt": "^5.0.2",
     "@types/body-parser": "^1.19.5",
     "@types/cors": "^2.8.18",
+    "@types/dotenv": "^8.2.3",
     "@types/express": "^5.0.2",
     "@types/express-rate-limit": "^6.0.2",
     "@types/jsonwebtoken": "^9.0.9",
